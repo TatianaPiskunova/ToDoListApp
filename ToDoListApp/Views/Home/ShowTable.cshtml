@@ -1,0 +1,91 @@
+﻿@model List<TaskToDo>
+
+@{
+    Layout = "";
+}
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Срок выполнения</th>
+            <th scope="col">Отметка о выполнении</th>
+            <th scope="col">Отметка об удалении</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model is not null)
+        {
+            @foreach (var task in Model)
+            {
+                <tr>
+                    <td>@task.TaskId</td>
+                    <td>@task.Title</td>
+                    <td>@task.Description</td>
+                    <td>@task.DueDate</td>
+                    @if (task.IsDone == false)
+                    {
+                        <td>
+                            <a asp-controller="Home"
+                               asp-action="FinishTask"
+                               asp-route-id="@task.TaskId"
+                               data-ajax="true"
+                               data-ajax-method="get"
+                              
+                               data-ajax-update="#showTable"
+                               data-ajax-mode="replace">
+                                Выполнить
+                            </a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>Выполнена</td>
+                    }
+                    @if (task.IsDel == false)
+                    {
+                        <td>
+                            <a asp-controller="Home"
+                               asp-action="DelTask"
+                               asp-route-id="@task.TaskId"
+                               data-ajax="true"
+                               data-ajax-method="get"
+                               data-ajax-update="#showTable"
+                               data-ajax-mode="replace"
+                              >
+                                Удалить
+                            </a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>Удалена</td>
+                    }
+
+                    <td>
+
+                        <a asp-controller="Home"
+                           asp-action="UpdateTask"
+                           asp-route-id="@task.TaskId"
+                           data-ajax="true"
+                           data-ajax-method="get"
+                           data-ajax-update="#UpdateTask"
+                           data-ajax-mode="replace"
+                           data-ajax-success="$('#UpdateTask').show()">
+                            Изменить
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        }
+
+
+    </tbody>
+</table>
+

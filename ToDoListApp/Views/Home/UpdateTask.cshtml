@@ -1,0 +1,62 @@
+﻿@model UpdateTaskViewModel
+
+<form asp-controller="Home"
+      asp-action="UpdateTask"
+      method="post"
+      data-ajax="true"
+      data-ajax-method="post"
+      data-ajax-success="$('#UpdateTask').hide()"
+      data-ajax-update="#showTable"
+      data-ajax-mode="replace"
+      style="margin-top:50px;">
+
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <input asp-for="Id" hidden readonly />
+
+    <div class="form-group">
+        <label asp-for="Title">Название</label>
+        <span asp-validation-for="Title" class="text-danger"></span>
+        <input asp-for="Title" value="@Model.Title" class="form-control" />
+        <label asp-for="Description">Описание</label>
+        <span asp-validation-for="Description" class="text-danger"></span>
+        <input asp-for="Description" value="@Model.Description" class="form-control" />
+        <label asp-for="DueDate">Срок выполнения</label>
+        <span asp-validation-for="DueDate" class="text-danger"></span>
+        <input asp-for="DueDate" class="form-control" />
+
+    </div>
+    <p>Отметка о выполнении</p>
+    <div class="form-check">
+        <input class="form-check-input" asp-for="@Model.IsDone" type="radio" id="exampleRadios1" value="yes">
+        <label class="form-check-label" for="exampleRadios1">
+            Выполнена
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" asp-for="@Model.IsDone" type="radio" id="exampleRadios1" value="no">
+        <label class="form-check-label" for="exampleRadios1">
+            Не выполнена
+        </label>
+    </div>
+
+    <p>Отметка об удалении</p>
+    <div class="form-check">
+        <input class="form-check-input" asp-for="@Model.IsDel" type="radio" id="exampleRadios1" value="yes">
+        <label class="form-check-label" for="exampleRadios1">
+            Пометить на удаление
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" asp-for="@Model.IsDel" type="radio" id="exampleRadios1" value="no">
+        <label class="form-check-label" for="exampleRadios1">
+            Не удалять
+        </label>
+    </div>
+
+    <input type="submit" class="btn btn-success m-2" value="ОК" />
+
+</form>
+
+
+
+      

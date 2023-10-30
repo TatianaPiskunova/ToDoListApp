@@ -1,0 +1,26 @@
+﻿@model List<TaskToDo>
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>ToDoList</div>
+
+<div id="showTable" class="overflow-auto" style="height:400px;">
+   <partial name="ShowTable" />
+</div>
+
+                <a asp-controller="Home"
+                   asp-action="AddTask"
+                   class="btn btn-primary" style="width:400px; margin-top:50px;"
+                   data-ajax="true"
+                   data-ajax-update="#AddTask"
+                   data-ajax-mode="replace"
+                   data-ajax-method="get"
+                   data-ajax-success="$('#AddTask').show()">
+                   Добавить новую задачу
+                </a>
+
+<div id="AddTask"></div>
+<div id="UpdateTask"></div>
